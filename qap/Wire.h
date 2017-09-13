@@ -15,6 +15,7 @@ class Wire {
 public:
 	Wire(Gate* in = NULL, Gate* out = NULL) : input(in), output(out) { visited = false; Field::Zero(&value); trueInput = false; trueOutput = false; witnessInput = false; }
 	
+	//可能是一个中间wire，作为上一个gate的输出，下一个gate的输入
 	Gate* input;	// NULL if this is a circuit input
 	Gate* output;	// NULL if this is a circuit output
 	FieldElt value;

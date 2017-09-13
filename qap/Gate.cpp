@@ -22,7 +22,7 @@ void Gate::assignInput(Wire* wire) {
 	assert(wire);
 	assert(assignedInputs < maxInputs);
 	inputs[assignedInputs++] = wire;
-	wire->output = this;
+	wire->output = this; //wire输出到
 }
 
 // If this gate's inputs have been visited, set its output to visited, and return true

@@ -5,7 +5,7 @@
 
 GateAddN::GateAddN(Field* field, int N) : Gate(field) {
 	this->N = N;
-	inputs = new Wire*[N];
+	inputs = new Wire*[N]; //N个输入
 	maxInputs = N;
 	assignedInputs = 0;
 

@@ -24,17 +24,22 @@ public:
 	PublicKey();
 	PublicKey(int numPowers, int numPolys, bool isNIZK);
 
+	//qap size = numPolys
+
 	// Powers of s^i
 	LEncodedElt* powers;
 	LEncodedElt* alphaPowers;
 
 	// Lots of polys evaluated at s
+	// vk(s)*g, wk(s)*g
 	LEncodedElt* V;
 	REncodedElt* W;
 
+	// alpha*vk(s)*g, alpha*wk(s)*g
 	LEncodedElt* alphaV;
 	REncodedElt* alphaW;
 
+	//beta_v*vk(s)*g, beta_w*wk(s)*g
 	LEncodedElt* betaV;
 	LEncodedElt* betaW;	
 

@@ -1826,7 +1826,7 @@ bool QAP::verify(Keys* keys, Proof* proof, variables_map& config) {
 		// Outputs
 		for (int i = 0; i < circuit->outputs.size(); i++) {
 			field->mul(proof->outputs[i], sk->v[i + circuit->inputs.size() + 1], tmp);
-			field->add(Vio, tmp, Vio); // V += inputs[i] * sk->v[i+1];	
+			field->add(Vio, tmp, Vio); // V += outputs[i] * sk->v[i+1];	
 		}
 
 		encoding->encodeSlowest(Vio, encodedVio);	 // Computes the power directly -- no point building a table just for this

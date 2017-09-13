@@ -26,6 +26,7 @@ public:
 
 	virtual void eval() = 0;
 
+	//添加输入和输出
 	virtual void assignInput(Wire* wire);
 	void assignOutput(Wire* wire);
 
@@ -46,5 +47,5 @@ public:
 protected:
 	Field* field;
 	int maxInputs;
-	int assignedInputs;
+	int assignedInputs; //分配的输入总数
 };
