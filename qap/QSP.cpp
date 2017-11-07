@@ -155,6 +155,26 @@ void QSP::strengthen() {
 	FieldElt one;
 	field->one(one);
 
+	/* 
+	 * I_ij = zero and one polynomials of wire i  
+	 * v_k(x) = vprime_k(x) (mod tprime(x)) for k = 1, ..., m
+	 * w_k(x) = wprime_k(x) (mod tprime(x))
+	 *
+	 * v_k(x) = 0 (mod tw(x))
+	 * w_k(x) = 0 (mod tv(x))
+	 *
+	 * v_0(x) = 1 (mod tw(x))
+	 * w_0(x) = 1 (mod tv(x))
+	 *
+	 * v_0(x) = 0 (mod tprime(x))
+	 * w_0(x) = 0 (mod tprime(x))
+	 */
+
+	/* 
+	 * 对每个wire都计算一个wire consistency checker
+	 * 然后将所有的checker经过CRT过程构成最后的checker
+	 * 
+	 */
 #ifndef DEBUG_STRENGTHEN
 	// For each wire in the circuit
 	for (BoolWireVector::iterator witer = circuit->wires.begin();
