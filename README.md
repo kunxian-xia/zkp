@@ -32,3 +32,9 @@ d). CRT。
 假设一个n次多项式p, 给定其在n+1个不同点的取值，那么
 
 - Q5 给定了一个输入，如何算出两个多项式v(x), w(x)?
+
+
+== QAP
+QAP的构造相对比较简单，核心在于如何把arithmetic circuit分解成若干个multi subcircuit的复合。
+
+- 问题1. 怎么构造一个circuit呢？

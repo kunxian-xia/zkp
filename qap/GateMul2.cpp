@@ -75,6 +75,7 @@ void completeBranch(CachedPolynomial* poly, Field* field) {
 	}
 }
 
+//cachedPolynomial的作用，换句话，这个函数的底层算法是什么？
 // Implemented iteratively, so we don't pop the stack while recursing
 // TODO: Don't really need the divisions in the cached poly case. 
 // Just need to use wireMod.my, as long as we update that mod for each gate we traverse, if we decide not to cache at every gate
