@@ -59,10 +59,10 @@ QSP::QSP(BoolCircuit* circuit, Encoding* encoding) {
 // W has the same sparse polynomials as V, but they're defined in terms of a separate set of roots.
 void QSP::duplicateVtoW() {
 	// Generate w's roots
-	genFreshRoots((int)vTargetRoots.size(), wTargetRoots);
+	genFreshRoots((int)vTargetRoots.size(), wTargetRoots); //[kunxian]: equals to 9*s
 
 	// Duplicate the polynomials in terms of the new roots
-	W.resize(V.size());
+	W.resize(V.size()); //[kunxian]: equals to 12*s
 	for (int i = 0; i < V.size(); i++) {
 		W[i] = new SparsePolynomial;
 		W[i]->id = V[i]->id;

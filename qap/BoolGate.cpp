@@ -66,13 +66,13 @@ void BoolGate::genericSP(QSP* qsp) {
 		sparsePoly->addNonZeroRoot(rootIndex + i, one, qsp->field);
 
 		if (i < 2) {
-			inputs[0]->zero.push_back(sparsePoly); //I_l0 = {p1, p2}
+			inputs[0]->zero.push_back(sparsePoly); //I_l0 = {p0, p1}
 		} else if (i < 4) {
-			inputs[0]->one.push_back(sparsePoly); //I_l1 = {p3, p4}
+			inputs[0]->one.push_back(sparsePoly); //I_l1 = {p2, p3}
 		} else if (i < 6) {
-			inputs[1]->zero.push_back(sparsePoly); //I_r0 = {p5, p6}
+			inputs[1]->zero.push_back(sparsePoly); //I_r0 = {p4, p5}
 		} else {
-			inputs[1]->one.push_back(sparsePoly); //I_r1 = {p7, p8}
+			inputs[1]->one.push_back(sparsePoly); //I_r1 = {p6, p7}
 		}
 	}
 
@@ -92,7 +92,7 @@ void BoolGate::genericSP(QSP* qsp) {
 	sparsePoly->addNonZeroRoot(rootIndex + 6, negOne, qsp->field);
 
 	// All output wires include the target's "special" 1 (target is (0, 0, ..., 0, 1))
-	sparsePoly->addNonZeroRoot(rootIndex + 8, one, qsp->field); 
+	sparsePoly->addNonZeroRoot(rootIndex + 8, one, qsp->field); //t - p2 - p6
 
 	// Output wire 2
 	sparsePoly = qsp->newSparsePoly();
@@ -100,7 +100,7 @@ void BoolGate::genericSP(QSP* qsp) {
 	getOutput(true, false)->push_back(sparsePoly);
 	sparsePoly->addNonZeroRoot(rootIndex + 3, negOne, qsp->field);
 	sparsePoly->addNonZeroRoot(rootIndex + 4, negOne, qsp->field);
-	sparsePoly->addNonZeroRoot(rootIndex + 8, one, qsp->field);
+	sparsePoly->addNonZeroRoot(rootIndex + 8, one, qsp->field);// t - p3 - p4
 	
 	// Output wire 3
 	sparsePoly = qsp->newSparsePoly();
@@ -108,7 +108,7 @@ void BoolGate::genericSP(QSP* qsp) {
 	getOutput(false, true)->push_back(sparsePoly);
 	sparsePoly->addNonZeroRoot(rootIndex + 0, negOne, qsp->field);
 	sparsePoly->addNonZeroRoot(rootIndex + 7, negOne, qsp->field);
-	sparsePoly->addNonZeroRoot(rootIndex + 8, one, qsp->field);
+	sparsePoly->addNonZeroRoot(rootIndex + 8, one, qsp->field); //t - p0 - p7
 	
 	// Output wire 4
 	sparsePoly = qsp->newSparsePoly();
@@ -116,12 +116,16 @@ void BoolGate::genericSP(QSP* qsp) {
 	getOutput(false, false)->push_back(sparsePoly);
 	sparsePoly->addNonZeroRoot(rootIndex + 1, negOne, qsp->field);
 	sparsePoly->addNonZeroRoot(rootIndex + 5, negOne, qsp->field);
-	sparsePoly->addNonZeroRoot(rootIndex + 8, one, qsp->field);
+	sparsePoly->addNonZeroRoot(rootIndex + 8, one, qsp->field); //[kunxian]: t - p1 - p5
 
 	// Finally, extend the current v_0 with the _negative_ of the target vector for this SP (target is (0, 0, ..., 0, 1))
-	sparsePoly = qsp->getSPtarget();
-	sparsePoly->addNonZeroRoot(rootIndex + 8, negOne, qsp->field);//*t
-	
+	sparsePoly = qsp->getSPtarget(); //[kunxian]: get v_0
+	sparsePoly->addNonZeroRoot(rootIndex + 8, negOne, qsp->field);//t
+	//[kunxian]: up to this step, the construction of SP for a bool gate is done
+	//           which add two polys to each input wire's zero and one, and 
+	//			 four polys to output wire.
+
+	//[kunxian]: begin to construct witness that f(u) = v
 	// Assign the appropriate polynomials to each wire
 	assert(assignedInputs == 2);
 	if (inputs[0]->value && inputs[1]->value) {
