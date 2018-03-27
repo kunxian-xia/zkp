@@ -29,6 +29,24 @@
 
 ## How are the QAP codes organized?
 
+## pairing
+pairing e: G1 * G2 -> Gt is a bilinear map.
+
+In a typical instantiation of pairing e,
+- cyclic group G1 is E(Fp)[n] where n = p + 1-t;
+
+- cyclic group G2 is inverse image of E'(Fp2)[n] under a twisting isomorphism phi from E' to E;
+
+- the target group Gt is a multiplicative subgroup of field Fp12;
+
+- Gt = { x in Fp12 : x^r = 1 for some integer r };
+
+- the field Fp12 is constructed via the following tower
+    - Fp2 = Fp[u] / (u^2 + 1);
+    - Fp6 = Fp2[v] / (v^3 - u') where u' = u+1;
+    - Fp12 = Fp6[w] / (w^2 - v).
+
+Therefore, in this typical setting, the operation in these groups are `scalar multiplication`, `scalar multiplication`, and `exponentation`. And the finite fields we need to handle are prime field and its finite extension.
 
 ## GGPR proof system
 
