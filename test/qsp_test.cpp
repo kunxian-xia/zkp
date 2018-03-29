@@ -8,6 +8,8 @@ field_desc_tc* initField()
     field_desc_tc* alt_bn128_field = new field_desc_tc;
     
     alt_bn128_field->modulus = libff::bigint<LIMBS>("21888242871839275222246405745257275088696311157297823662689037894645226208583");
+    alt_bn128_field->one = bigint<LIMBS>("6350874878119819312338956282401532409788428879151445726012394534686998597021");
+    alt_bn128_field->zero = bigint<LIMBS>("0");
     //assert(alt_bn128_field->modulus_is_valid());
     if (sizeof(mp_limb_t) == 8)
     {
@@ -30,12 +32,13 @@ field_desc_tc* initField()
     //alt_bn128_field->root_of_unity = alt_bn128_Fq("21888242871839275222246405745257275088696311157297823662689037894645226208582");
     //alt_bn128_field->nqr = alt_bn128_Fq("3");
     //alt_bn128_field->nqr_to_t = alt_bn128_Fq("21888242871839275222246405745257275088696311157297823662689037894645226208582");
+
+    return alt_bn128_field;
 }
 void runSimpleQspTests() 
 {
-    
-    Field* field;
-    field->msfield = initField();
+    field_desc_tc* field_tc = initField(); 
+    Field* field = new Field(field_tc);
 
 	CircuitBinaryAdder circuit(5);
 
@@ -53,7 +56,7 @@ void runSimpleQspTests()
 
 	// Try constructing a QSP
 	QSP qsp(&circuit, field);	
-
+    printf("qsp's size = %d, degree= %d\n", qsp.getSize(), qsp.getDegree());
 /*
 	Keys* keys = qsp.genKeys(config);
 

@@ -11,3 +11,6 @@ libqsp.a: Field.o SparsePolynomial.o BoolGate.o BoolCircuit.o  \
 
 %.o: %.cpp 
 	g++ -std=c++11 -g -c $<
+
+clean: *.o 
+	rm -f *.o
