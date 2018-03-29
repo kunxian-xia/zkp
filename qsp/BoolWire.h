@@ -3,9 +3,10 @@
 #include <list>
 #include <vector>
 
-#include "Types.h"
-#include "BoolGate.h"
-#include "BoolPoly.h"
+//#include "Types.h"
+//#include "BoolGate.h"
+//#include "BoolPoly.h"
+#include "SparsePolynomial.h"
 
 class BoolWire;
 class BoolGate;

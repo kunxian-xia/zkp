@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Field.h"
+//#include "Field.h"
 #include <vector>
 #define __QSP
 #include "SparsePolynomial.h"
