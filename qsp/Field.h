@@ -83,6 +83,6 @@ private:
 	digit_t mulTempSpace[8];
 	digit_t divTempSpace[50];
 
-	FieldElt ctr;
 */
+	FieldElt ctr;
 };

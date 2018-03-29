@@ -4,8 +4,9 @@
 #include <hash_map>	
 #include "Field.h"
 
-using namespace stdext;
-
+#if defined(__linux__)
+using namespace __gnu_cxx;
+#endif
 // We represent polynomials by the values they take
 // on when evaluated at the target polynomial's roots,
 // omitting those (many) roots where the polynomials are zero

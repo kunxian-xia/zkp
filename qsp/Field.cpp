@@ -8,6 +8,7 @@ Field::Field(field_desc_tc* field)
 {
     msfield = field;
     FIELDMODULUS = msfield->modulus;
+    memcpy(ctr.data, msfield->one.data, sizeof(FieldElt));
 }
 
 void Field::assignRandomElt(FieldElt* elt)
@@ -84,4 +85,26 @@ void Field::add(const FieldElt& a, const FieldElt& b, FieldElt& c)
     tmpB.mont_repr = b;
     tmpA += tmpB;
     memcpy(c.data, tmpA.mont_repr.data, sizeof(FieldElt));
+}
+
+void Field::sub(const FieldElt& a, const FieldElt& b, FieldElt& c)
+{
+    Fp_model<LIMBS, FIELDMODULUS> tmpA;
+    Fp_model<LIMBS, FIELDMODULUS> tmpB;
+
+    tmpA.mont_repr = a;
+    tmpB.mont_repr = b;
+    tmpA += tmpB;
+    memcpy(c.data, tmpA.mont_repr.data, sizeof(FieldElt));
+}
+
+void Field::print(const FieldElt& e)
+{
+    e.print();
+}
+
+void Field::assignFreshElt(FieldElt* elt)
+{
+    memcpy(elt->data, ctr.data, sizeof(FieldElt));
+    add(ctr, ctr, ctr);
 }

@@ -1,7 +1,7 @@
 #include "Types.h"
 #include <assert.h>
 #include "BoolGate.h"
-#include "QSP.h"
+//#include "QSP.h"
 
 BoolGate::~BoolGate() {
 	;

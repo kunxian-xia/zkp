@@ -67,6 +67,7 @@ void SparsePolynomial::addModifiedPoly(SparsePolynomial& poly, FieldElt& mod, Fi
 	}
 }
 
+/*
 bool SparsePolynomial::equal(Field* field, SparsePolynomial &other) {
 	for (NonZeroRoots::iterator iter = this->nonZeroRoots.begin();
 		   iter != nonZeroRoots.end();
@@ -85,7 +86,7 @@ bool SparsePolynomial::equal(Field* field, SparsePolynomial &other) {
 	}
 	return true;
 }
-
+*/
 unsigned int SparsePolynomial::size() {
 	return (unsigned int)nonZeroRoots.size();
 }
@@ -94,7 +95,7 @@ void SparsePolynomial::print(Field* field) {
 	for (NonZeroRoots::iterator iter = this->nonZeroRoots.begin();
 		  iter != nonZeroRoots.end();
 			iter++) {
-		printf("(%u, ", iter->first);
+		printf("(%ul, ", iter->first);
 		field->print(iter->second->value);
 		printf(") ");
 	}

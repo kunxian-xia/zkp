@@ -1,18 +1,21 @@
 #pragma once
 
 #include <vector>
-//#include "BoolCircuit.h"
+#include "BoolCircuit.h"
 #include "Field.h"
 //#include "Proof.h"
 //#include "Keys.h"
 //#include "Encoding.h"
-//#include "BoolPoly.h"
+#include "SparsePolynomial.h"
 
 //#include <boost/program_options.hpp>
 //using namespace boost::program_options;
 
 class BoolCircuit;
 
+typedef struct {
+	FieldElt elt;
+} WrappedElt;
 typedef std::vector<WrappedElt> EltVector;
 
 // Uncomment to compare slow poly interpolation to fast
@@ -20,15 +23,16 @@ typedef std::vector<WrappedElt> EltVector;
 
 class QSP {
 public:
-	QSP(BoolCircuit* circuit, Encoding* encoding);
+	QSP(BoolCircuit* circuit, Field* field);
 	~QSP();
 
 	void strengthen();	// Convert this QSP into a strong QSP
 	
+	/*
 	Keys* genKeys(variables_map& config);
 	QspProof* doWork(PublicKey* pubKey, variables_map& config);	// Expects you to have evaluated the circuit associated with this QSP!
 	bool verify(Keys* keys, QspProof* proof);
-
+	*/
 	int getSize() { return this->size; }
 	int getDegree() { return this->degree; }
 
@@ -47,7 +51,7 @@ public:
 	EltVector wireCheckerTargetRoots;	// t'(x) = \prod(x-r), for all r in wireCheckerTargetRoots	
 
 private:
-	Encoding* encoding;			// Encoding we'll use when doing crypto with this QSPs
+	//Encoding* encoding;			// Encoding we'll use when doing crypto with this QSPs
 
 	// Each element of V corresponds to a v_k(x), 
 	// and indicates the values in targetRoots at which v_k(x) is non-zero
@@ -81,8 +85,8 @@ private:
 	// with each entry representing the value of the corresponding root
 	void evalDensePoly(FieldElt* poly, int polySize, FieldElt* lagrange, FieldElt& result);
 
-	Poly* interpolate(PublicKey* pk, FieldElt* poly);	
-	Poly* getTarget(PublicKey* pk);
+	//Poly* interpolate(PublicKey* pk, FieldElt* poly);	
+	//Poly* getTarget(PublicKey* pk);
 
 	// Take an evaluated circuit and compute an inner product between
 	// the encoded values in the key and the coefficients of the circuit's wires
@@ -95,7 +99,7 @@ private:
 	void applyBoolWireValues(BoolWireVector& wires, EncodedEltType* key, EncodedEltType& result);
 
 	// Apply a set of coefficients to a set of encoded values
-	void applyCoefficients(variables_map& config, long numCoefficients, LEncodedElt* key, FieldElt* coefficients, LEncodedElt& result);
+	//void applyCoefficients(variables_map& config, long numCoefficients, LEncodedElt* key, FieldElt* coefficients, LEncodedElt& result);
 
 	// Combine a set of sparse polynomials into a single dense polynomial
 	// The polynomials are in evaluation form (evaluated at targetRoots)

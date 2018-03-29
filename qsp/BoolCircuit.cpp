@@ -6,15 +6,18 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <stdio.h>
 #include <assert.h>
 using namespace std;
 
+/*
 BoolCircuit::BoolCircuit(const string filename) {
 	parse(filename);
 	consolidate();
 	sort();
 	assignIDs();
 }
+*/
 
 BoolCircuit::~BoolCircuit() {
 
@@ -144,6 +147,7 @@ BoolGate* BoolCircuit::parseGate(char* type, int numGateInputs, char* inputStr, 
 	return gate;
 }
 
+/*
 void BoolCircuit::parse(const string filename) {
 	long wireId, numWires, numGateInputs, numGateOutputs;
 	wireId = numWires = numGateInputs = numGateOutputs = 0;
@@ -177,7 +181,7 @@ void BoolCircuit::parse(const string filename) {
 	}
 	ifs.close();
 }
-
+*/
 
 // Create some helpful data structures to facilitate later operations
 void BoolCircuit::consolidate() {
